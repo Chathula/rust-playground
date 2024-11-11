@@ -150,7 +150,7 @@ fn main() {
 
     match result {
         Some(index) => println!("Found {} at index {}", target, index),
-        None => println!("{} not found", target),
+        None => println!("{} not found in the list", target),
     }
 
 }
