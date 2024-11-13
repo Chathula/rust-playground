@@ -153,6 +153,47 @@ fn main() {
         None => println!("{} not found in the list", target),
     }
 
+    // for loops
+    for i in 0..10 {
+        println!("{}", i);
+    }
+
+    for i in 1..=5 {
+        println!("{}", i);
+    }
+
+    let names = vec!["Alice", "Bob", "Charlie", "Dave", "Eve"];
+
+    for i in 0..names.len() {
+        println!("{} is at index {}", names[i], i);
+    }
+
+    for (index, name) in names.iter().enumerate() {
+        println!("{} is at index {}", name, index);
+    }
+
+    // while loops
+    let mut count = 0;
+
+    while count < 10 {
+        println!("{}", count);
+        count += 1;
+    }
+
+    // loop
+    let mut count = 0;
+
+    let result = loop {
+        if count < 10 {
+            println!("{}", count);
+            count += 1;
+        } else {
+            break count;
+        }      
+    };
+
+    println!("Result: {}", result);
+
 }
 
 #[cfg(test)]
