@@ -66,6 +66,14 @@ fn binary_search(list: &Vec<i32>, target: i32, start: usize, end: usize) -> Opti
     }
 }
 
+fn get_full_name<'a>(first_name: &'a str, last_name: &'a str, length: &usize) -> &'a str {
+    if first_name.len() > *length {
+        first_name
+    } else {
+        last_name
+    }
+}
+
 fn main() {
     let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let names = vec!["Alice", "John", "Peter"];
@@ -193,6 +201,16 @@ fn main() {
     };
 
     println!("Result: {}", result);
+
+    let first_name = "John";
+    let last_name = "Doe";
+    let length = 4;
+
+    let selected_name = get_full_name(&first_name, &last_name, &length);
+
+    println!("First name: {}", first_name);
+    println!("Last name: {}", last_name);
+    println!("Selected name: {}", selected_name);
 
 }
 
