@@ -5,19 +5,23 @@ use std::cell::RefCell;
 pub struct Server {
     host: String,
     port: i32,
-    tls: bool
+    tls: bool,
 }
 
 impl Server {
     pub fn new(host: String, port: i32) -> ServerBuilder {
-        ServerBuilder { host, port, tls: false }
+        ServerBuilder {
+            host,
+            port,
+            tls: false,
+        }
     }
 }
 
 pub struct ServerBuilder {
     host: String,
     port: i32,
-    tls: bool
+    tls: bool,
 }
 
 impl ServerBuilder {
@@ -30,7 +34,7 @@ impl ServerBuilder {
         Server {
             host: self.host.clone(),
             port: self.port,
-            tls: self.tls
+            tls: self.tls,
         }
     }
 }
@@ -52,7 +56,7 @@ fn update_node(node: &Node) {
 
 fn binary_search(list: &Vec<i32>, target: i32, start: usize, end: usize) -> Option<usize> {
     if start > end {
-        return None
+        return None;
     }
 
     let mid = (start + end) / 2;
@@ -66,7 +70,7 @@ fn binary_search(list: &Vec<i32>, target: i32, start: usize, end: usize) -> Opti
     }
 }
 
-fn get_full_name<'a>(first_name: &'a str, last_name: &'a str, length: &usize) -> &'a str {
+fn get_selected_name<'a>(first_name: &'a str, last_name: &'a str, length: &usize) -> &'a str {
     if first_name.len() > *length {
         first_name
     } else {
@@ -78,10 +82,13 @@ fn main() {
     let numbers = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     let names = vec!["Alice", "John", "Peter"];
     let ages = vec![10, 20, 30];
-    
+
     let total = numbers.iter().map(|n| n * n).collect::<Vec<i32>>();
 
-    let even_numbers = numbers.iter().filter(|n| *n % 2 == 0).collect::<Vec<&i32>>();
+    let even_numbers = numbers
+        .iter()
+        .filter(|n| *n % 2 == 0)
+        .collect::<Vec<&i32>>();
 
     let fold_value = numbers.iter().fold(1, |acc, n| acc * n);
 
@@ -117,7 +124,6 @@ fn main() {
     } else {
         println!("No number is greater than 9");
     }
-
 
     let host: String = String::from("127.0.0.1");
     let port: i32 = 8080;
@@ -197,7 +203,7 @@ fn main() {
             count += 1;
         } else {
             break count;
-        }      
+        }
     };
 
     println!("Result: {}", result);
@@ -206,12 +212,11 @@ fn main() {
     let last_name = "Doe";
     let length = 4;
 
-    let selected_name = get_full_name(&first_name, &last_name, &length);
+    let selected_name = get_selected_name(&first_name, &last_name, &length);
 
     println!("First name: {}", first_name);
     println!("Last name: {}", last_name);
     println!("Selected name: {}", selected_name);
-
 }
 
 #[cfg(test)]
@@ -260,5 +265,19 @@ mod tests {
         let result = binary_search(&numbers_list, target, 0, numbers_list.len() - 1);
 
         assert_eq!(result, None);
+    }
+
+    #[test]
+    fn it_should_return_selected_name() {
+        let first_name = "John";
+        let last_name = "Doe";
+        let length = 4;
+
+        let selected_name: &str = get_selected_name(&first_name, &last_name, &length);
+        assert_eq!(selected_name, last_name);
+
+        let length = 2;
+        let selected_name: &str = get_selected_name(&first_name, &last_name, &length);
+        assert_eq!(selected_name, first_name);
     }
 }
